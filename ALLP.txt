@@ -1,0 +1,443 @@
+ALLP
+
+AJX
+
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>User Registration</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country:</label>
+                <input type="text" class="form-control" id="country" name="country" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btn">Register</button>
+            <button type="button" class="btn btn-secondary" id="clearBtn">Clear</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+	
+</html>
+
+#####################################################################################################
+data_list.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Users</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="mt-5">Registered Users</h2>
+        <div class="table-wrapper mt-3">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>City</th>
+                        <th>Country</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let displayData = () => {
+                let tbody = document.getElementById("tbody");
+                tbody.innerHTML = "";
+                let storedUser = JSON.parse(localStorage.getItem("users"));
+                storedUser.map((user, index) =>
+                (tbody.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${user.name.first} ${user.name.last}</td>
+            <td>${user.login.username}</td>vs
+            <td>${user.dob.age}</td>
+            <td>${user.email}</td>
+            <td>${user.phone}</td>
+            <td>${user.location.city}</td>
+            <td>${user.location.country}</td>
+          </tr>`)
+                );
+            };
+
+            displayData();
+        });
+    </script>
+</body>
+
+</html>
+****************************************************************************************************
+script.js
+
+$(document).ready(function () {
+    $("#registrationForm").submit(function (event) {
+        event.preventDefault();
+        const name = $("#name").val();
+        const username = $("#username").val();
+        const age = $("#age").val();
+        const email = $("#email").val();
+        const password = $("#password").val();
+        const phone = $("#phone").val();
+        const city = $("#city").val();
+        const country = $("#country").val();
+
+        if (name && username && age && email && password && phone && city && country) {
+            let postObject = {
+                name: { first: name, last: "" },
+                login: { username: username },
+                dob: { age: age },
+                email: email,
+                phone: phone,
+                location: { city: city, country: country }
+            };
+
+            let storedUser = JSON.parse(localStorage.getItem("users")) || [];
+            storedUser.unshift(postObject);
+            localStorage.setItem("users", JSON.stringify(storedUser));
+            window.location.href = 'data_list.html';
+        } else {
+            alert("Please fill in all the required fields.");
+        }
+    });
+
+    $("#clearBtn").click(function () {
+        $("input[type='text'], input[type='number'], input[type='email'], input[type='password']").val("");
+    });
+});
+
+=====================================================================================
+
+Dashboard
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Sidebar styling */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #343a40;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #fff;
+      display: block;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    /* Content styling */
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    /* Cards styling */
+    .card {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-lg-3 sidebar">
+      <a href="#">Dashboard</a>
+      <a href="#">Orders</a>
+      <a href="#">Products</a>
+      <a href="#">Customers</a>
+      <a href="#">Reports</a>
+    </div>
+    <!-- Content -->
+    <div class="col-lg-9 content">
+      <h2>Admin Dashboard</h2>
+      <!-- Cards for statistics -->
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Orders</h5>
+              <p class="card-text">100</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Products</h5>
+              <p class="card-text">50</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Total Customers</h5>
+              <p class="card-text">200</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+=====================================================================================
+
+Docker
+
+docker --version
+
+sudo apt install docker.io
+
+sudo systemctl enable docker
+
+sudo systemctl start docker 
+
+sudo docker run hello-world
+
+sudo docker pull OpenJDK
+
+sudo docker images
+
+sudo docker run --name JAVA -it -d OpenJDK
+
+sudo docker exec -it JAVA jshell
+
+>System.out.println ("Hello")
+
+>/exit
+
+sudo docker stop JAVA 
+
+sudo docker rm JAVA
+
+sudo systemctl stop docker
+
+sudo systemctl disable docker 
+
+=================================================================================
+
+gitC
+
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+
+git clone <repository-url>
+
+
+git status
+
+
+git add .
+
+git commit -m "Your commit message here"
+
+git push origin master
+
+
+windows 
+echo "# as" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/MuleAth/as.git
+git push -u origin main
+
+git remote add origin https://github.com/MuleAth/as.git
+git branch -M main
+git push -u origin main
+
+================================================================================
+
+MobileWJ
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Mobile Website</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header">
+        <h1>Welcome to My Mobile Website</h1>
+    </div>
+    <div data-role="content">
+        <p>This is the home page of my mobile website.</p>
+        <a href="#about" data-role="button">About</a>
+        <a href="#services" data-role="button">Services</a>
+        <a href="#contact" data-role="button">Contact</a>
+    </div>
+    <div data-role="footer">
+        <h4>&copy; 2024 My Mobile Website</h4>
+    </div>
+</div>
+
+<div data-role="page" id="about">
+    <div data-role="header">
+        <h1>About Us</h1>
+    </div>
+    <div data-role="content">
+        <p>We are a leading company providing mobile solutions.</p>
+        <p>Learn more about our team and mission.</p>
+    </div>
+    <div data-role="footer">
+        <h4>&copy; 2024 My Mobile Website</h4>
+    </div>
+</div>
+
+<div data-role="page" id="services">
+    <div data-role="header">
+        <h1>Our Services</h1>
+    </div>
+    <div data-role="content">
+        <p>We offer a variety of services including:</p>
+        <ul data-role="listview" data-inset="true">
+            <li>Mobile App Development</li>
+            <li>Web Design</li>
+            <li>Digital Marketing</li>
+        </ul>
+    </div>
+    <div data-role="footer">
+        <h4>&copy; 2024 My Mobile Website</h4>
+    </div>
+</div>
+
+<div data-role="page" id="contact">
+    <div data-role="header">
+        <h1>Contact Us</h1>
+    </div>
+    <div data-role="content">
+        <p>Contact us for inquiries and collaborations.</p>
+        <p>Email: info@mymobilewebsite.com</p>
+        <p>Phone: 123-456-7890</p>
+    </div>
+    <div data-role="footer">
+        <h4>&copy; 2024 My Mobile Website</h4>
+    </div>
+</div>
+
+</body>
+</html>
+
+=================================================================================
+
+Nodej
+
+Node js 
+
+
+Create a Node folder
+
+go to the terminal 
+
+npm init
+
+npm install express 
+(package.json)
+
+create index.js in Node
+
+code in index.js
+
+const express =require('express');
+const app=express ();
+
+app.use(express.static('public'))
+
+app.listen(4000, () => {
+    console.log("server is started");
+})
+
+create a public folder in node
+
+create index.html         ------> To a server
+
+write the cotent in index.html
+
+then check the directory of index.js 
+
+go to the terminal and 
+
+node index.js
+
+go to the browser and write localhost:4000

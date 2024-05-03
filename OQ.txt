@@ -1,0 +1,18 @@
+1.	HTML (Hypertext Markup Language): It's the standard language for creating web pages, defining the structure and content using elements like headings, paragraphs, and images.
+2.	CSS (Cascading Style Sheets): CSS controls the visual presentation of HTML elements, allowing developers to style layout, colors, fonts, and more to enhance the appearance of web pages.
+3.	Bootstrap: A front-end framework offering pre-designed templates and components, facilitating responsive web development with ready-to-use UI elements and grid systems.
+4.	W3C (World Wide Web Consortium): The W3C sets global standards for the World Wide Web, ensuring interoperability and accessibility of web technologies through collaboration and development of specifications.
+5.	JavaScript: A versatile programming language primarily used for client-side scripting in web development, enabling dynamic content, interactive features, and manipulation of webpage elements.
+6.	Advanced JavaScript: Refers to advanced concepts such as closures, prototypes, async programming, and functional programming in JavaScript, crucial for writing efficient and scalable code.
+7.	AJAX (Asynchronous JavaScript and XML): AJAX allows web pages to update asynchronously by exchanging data with a server in the background, enabling smoother user experiences without page reloads.
+8.	jQuery: A fast and lightweight JavaScript library simplifying tasks like DOM manipulation, event handling, and AJAX calls, making web development faster and more efficient.
+9.	MVC (Model-View-Controller): An architectural pattern dividing applications into three interconnected components - Model (data), View (presentation), and Controller (logic), promoting modularity and separation of concerns.
+10.	TypeScript: TypeScript extends JavaScript by adding static typing, interfaces, and other features, enhancing code maintainability, scalability, and tooling support in large projects.
+11.	Angular: A front-end framework by Google for building dynamic and single-page applications, offering features like data binding, dependency injection, and modular development.
+12.	React.js: A JavaScript library for building user interfaces, emphasizing component-based architecture, virtual DOM, and unidirectional data flow for efficient and scalable UI development.
+13.	Node.js: Node.js is a server-side JavaScript runtime environment enabling developers to build fast, scalable, and real-time network applications using JavaScript.
+14.	Express.js: Express.js is a minimalist web application framework for Node.js, simplifying server-side development with features like routing, middleware support, and template engines.
+15.	MongoDB: MongoDB is a NoSQL database using a document-oriented data model, offering flexibility, scalability, and high performance for storing and retrieving data in modern web applications.
+16.	Mobile First: A design strategy prioritizing mobile device optimization in web development, ensuring seamless user experiences on smartphones and tablets before considering desktop layouts.
+17.	jQuery Mobile: A touch-optimized web framework for creating mobile-friendly websites and web applications, offering a unified UI system and cross-platform compatibility for diverse devices.
+

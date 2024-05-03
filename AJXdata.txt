@@ -1,0 +1,57 @@
+1
+[Document Ready]
+    |
+    ↓
+[Define displayData Function]
+    |
+    ↓
+[Retrieve Reference to tbody Element]
+    |
+    ↓
+[Clear Existing Content in tbody]
+    |
+    ↓
+[Retrieve User Data from localStorage]
+    |
+    ↓
+[Iterate Over Each User Data]
+    |
+    ↓
+[Construct HTML Content for Each User]
+    |
+    ↓
+[Display User Data in Table]
+    |
+    ↓
+[Call displayData Function on Document Ready]
+
+
+
+
+
+2 
+
+Start
+
+Retrieve "users" from localStorage
+|
+|  (Is "users" in localStorage?)
+|       |
+|       Yes
+|       |
+|       ↓
+|   Parse "users" into storedUser array
+|       |
+|       ↓
+|  Add postObject to the beginning of storedUser array
+|       |
+|       ↓
+|   Stringify storedUser array
+|       |
+|       ↓
+|  Store stringified storedUser back into "users" in localStorage
+|       |
+|       ↓
+| Redirect to 'data_list.html'
+|
+End
